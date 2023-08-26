@@ -2,11 +2,16 @@
 
 import { useEffect, useState } from 'react';
 
+import { useRouter } from 'next/navigation';
+
 import { zodResolver } from '@hookform/resolvers/zod';
+import axios from 'axios';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-hot-toast';
 
 import { type InitialSchema, initialSchema } from '@/lib/validations';
 
+import FileUpload from '../forms/file-upload';
 import { Button } from '../ui/button';
 import {
   Dialog,
@@ -21,6 +26,7 @@ import { Input } from '../ui/input';
 
 const InitialModal = () => {
   const [isMounted, setIsMounted] = useState(false);
+  const router = useRouter();
   const form = useForm<InitialSchema>({
     defaultValues: {
       name: '',
@@ -29,15 +35,23 @@ const InitialModal = () => {
     resolver: zodResolver(initialSchema)
   });
 
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
   const { isLoading } = form.formState;
 
   const onSubmit = async (values: InitialSchema) => {
-    console.log(values);
+    try {
+      await axios.post('/api/servers', values);
+
+      form.reset();
+      router.refresh();
+      window.location.reload();
+    } catch (err: unknown) {
+      toast.error('An error occurred while creating a profile.');
+    }
   };
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   if (!isMounted) {
     return null;
@@ -47,7 +61,7 @@ const InitialModal = () => {
     <Dialog open>
       <DialogContent className="overflow-hidden bg-white p-0 text-black">
         <DialogHeader className="px-6 pt-8">
-          <DialogTitle className="text-center text-2xl">
+          <DialogTitle className="text-center text-2xl font-bold">
             Customize your server
           </DialogTitle>
 
@@ -67,12 +81,11 @@ const InitialModal = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        {/* <FileUpload
+                        <FileUpload
                           endpoint="serverImage"
                           value={field.value}
                           onChange={field.onChange}
-                        /> */}
-                        File Upload
+                        />
                       </FormControl>
                     </FormItem>
                   )}

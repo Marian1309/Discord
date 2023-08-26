@@ -21,6 +21,8 @@ const prettierConfig = {
 
     '^@/types',
 
+    '^@/api',
+
     '^@/lib/(.*)$',
     '^@/hooks/(.*)$',
     '^@/actions/(.*)$',

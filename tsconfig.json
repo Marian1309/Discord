@@ -19,6 +19,7 @@
     "removeComments": true,
     "baseUrl": ".",
     "paths": {
+      "@/api/*": ["./src/app/api/*"],
       "@/*": ["./src/*"]
     }
   },

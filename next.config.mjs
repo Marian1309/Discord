@@ -15,7 +15,8 @@ const nextConfig = {
       'avatars.githubusercontent.com',
       'res.cloudinary.com',
       'i.ibb.co',
-      'images.unsplash.com'
+      'images.unsplash.com',
+      'uploadthing.com'
     ]
   },
   typescript: {
