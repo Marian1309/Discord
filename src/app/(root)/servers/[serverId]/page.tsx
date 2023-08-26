@@ -18,8 +18,8 @@ export const generateMetadata = async ({
   };
 };
 
-const ServerIdPage = () => {
-  return <p className="p-4">ServerId Page</p>;
+const ServerIdPage = async ({ params }: { params: { serverId: string } }) => {
+  return <p className="p-4">{params.serverId}</p>;
 };
 
 export default ServerIdPage;

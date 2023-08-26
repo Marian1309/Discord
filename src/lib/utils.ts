@@ -1,7 +1,6 @@
 import type { ClassValue } from 'clsx';
 import { clsx } from 'clsx';
 import dayjs from 'dayjs';
-import { toast } from 'react-hot-toast';
 import { twMerge } from 'tailwind-merge';
 
 export const cn = (...inputs: ClassValue[]) => {
@@ -22,14 +21,6 @@ export const formatPrice = (
     currency,
     notation
   }).format(Number(price));
-};
-
-export const copyToClipboard = (text: string, whatCopied?: string) => {
-  navigator.clipboard.writeText(text);
-
-  if (whatCopied) {
-    toast.success(`${whatCopied} copied to the clipboard.`);
-  }
 };
 
 export const handleWidth = () => {

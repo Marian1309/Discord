@@ -1,5 +1,3 @@
-'use server';
-
 import { redirect } from 'next/navigation';
 
 import { ChannelType } from '@prisma/client';
@@ -13,7 +11,7 @@ const ServerSidebar = async ({ serverId }: { serverId: string }) => {
   const profile = await currentProfile();
 
   if (!profile) {
-    return redirect('/');
+    redirect('/');
   }
 
   const server = await db.server.findUnique({

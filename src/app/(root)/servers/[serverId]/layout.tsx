@@ -35,7 +35,7 @@ const ServerIdLayout = async ({ children, params }: Props) => {
   });
 
   if (!server) {
-    return redirect('/');
+    redirect('/');
   }
 
   return (

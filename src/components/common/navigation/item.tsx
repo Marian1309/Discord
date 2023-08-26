@@ -45,7 +45,13 @@ const NavigationItem: FC<Props> = ({ id, imageUrl, name }) => {
                 'rounded-[16px] bg-primary/10 text-primary'
             )}
           >
-            <Image fill alt="Channel" src={imageUrl} />
+            <Image
+              alt="Channel"
+              src={imageUrl}
+              priority
+              width={100}
+              height={100}
+            />
           </div>
         </button>
       </ActionTooltip>
