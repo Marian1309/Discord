@@ -14,7 +14,6 @@ import {
 } from '@/components/ui/dropdown-menu';
 
 const ThemeToggle: FC = () => {
-  console.log('Theme');
   const { setTheme } = useTheme();
 
   const DROPDOWN_MENU_ITEMS: { label: string; id: number }[] = [
