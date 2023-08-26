@@ -2,7 +2,10 @@ import type { FC, ReactNode } from 'react';
 
 import type { Metadata } from 'next';
 
+import { ClerkProvider } from '@clerk/nextjs';
+
 import { openSans } from '@/lib/fonts';
+import { cn } from '@/lib/utils';
 
 import HotToastProvider from '@/components/providers/hot-toast';
 import ThemeProvider from '@/components/providers/theme';
@@ -33,20 +36,26 @@ export const metadata: Metadata = {
 
 const RootLayout: FC<{ children: ReactNode }> = ({ children }) => {
   return (
-    <html lang="en" suppressHydrationWarning className={openSans.className}>
-      <body className="container">
-        <HotToastProvider />
+    <ClerkProvider>
+      <html
+        lang="en"
+        suppressHydrationWarning
+        className={cn(openSans.className, 'container')}
+      >
+        <body className="bg-white dark:bg-[#313338]">
+          <HotToastProvider />
 
-        <ThemeProvider
-          themes={['light', 'dark']}
-          attribute="class"
-          enableSystem
-          defaultTheme="dark"
-        >
-          {children}
-        </ThemeProvider>
-      </body>
-    </html>
+          <ThemeProvider
+            themes={['light', 'dark']}
+            attribute="class"
+            enableSystem={false}
+            defaultTheme="dark"
+          >
+            {children}
+          </ThemeProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 };
 

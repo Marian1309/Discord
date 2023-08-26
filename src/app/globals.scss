@@ -57,7 +57,7 @@
   :root,
   html,
   body {
-    @apply min-h-screen scroll-smooth bg-background text-[14px] leading-normal text-foreground antialiased;
+    @apply min-h-screen scroll-smooth text-[14px] leading-normal text-foreground antialiased;
   }
 
   * {
