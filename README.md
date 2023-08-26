@@ -1,4 +1,4 @@
-# [Project Name](http://localhost:3000)
+# [Discord](http://localhost:3000)
 
 > **Warning**
 > This project is still in development and is not ready for production use.
@@ -12,6 +12,7 @@
 - **Styling:** [Tailwind CSS](https://tailwindcss.com)
 - **UI Components:** [Shadcn UI](https://ui.shadcn.com)
 - **Authentification:** [Clerk](https://clerk.com)
+- **UploadThing:** [UploadThing](https://uploadthing.com)
 - **Testing:** [Playwright](https://playwright.dev)
 
 ## Running Locally
