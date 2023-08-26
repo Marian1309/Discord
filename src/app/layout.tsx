@@ -8,6 +8,7 @@ import { openSans } from '@/lib/fonts';
 import { cn } from '@/lib/utils';
 
 import HotToastProvider from '@/components/providers/hot-toast';
+import ModalProvider from '@/components/providers/modal';
 import ThemeProvider from '@/components/providers/theme';
 
 import './globals.scss';
@@ -44,6 +45,8 @@ const RootLayout: FC<{ children: ReactNode }> = ({ children }) => {
       >
         <body className="bg-white dark:bg-[#313338]">
           <HotToastProvider />
+
+          <ModalProvider />
 
           <ThemeProvider
             themes={['light', 'dark']}

@@ -1,9 +1,10 @@
 import { type NextRequest, NextResponse } from 'next/server';
 
+import { MemberRole } from '@prisma/client';
 import { nanoid } from 'nanoid';
 
 import currentProfile from '@/lib/current-profile';
-import { MemberRole, db } from '@/lib/database';
+import { db } from '@/lib/database';
 
 const POST = async (req: NextRequest) => {
   try {

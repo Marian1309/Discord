@@ -7,3 +7,5 @@ export type Profile = {
   createdAt: Date;
   updatedAt: Date;
 };
+
+export type Modal = 'createServer';
