@@ -5,7 +5,6 @@ import type { Metadata } from 'next';
 import { ClerkProvider } from '@clerk/nextjs';
 
 import { openSans } from '@/lib/fonts';
-import { cn } from '@/lib/utils';
 
 import HotToastProvider from '@/components/providers/hot-toast';
 import ModalProvider from '@/components/providers/modal';
@@ -38,11 +37,7 @@ export const metadata: Metadata = {
 const RootLayout: FC<{ children: ReactNode }> = ({ children }) => {
   return (
     <ClerkProvider>
-      <html
-        lang="en"
-        suppressHydrationWarning
-        className={cn(openSans.className, 'container')}
-      >
+      <html lang="en" suppressHydrationWarning className={openSans.className}>
         <body className="bg-white dark:bg-[#313338]">
           <HotToastProvider />
 

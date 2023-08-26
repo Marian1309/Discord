@@ -1,6 +1,5 @@
 import { currentUser, redirectToSignIn } from '@clerk/nextjs';
-
-import type { Profile } from '@/types';
+import type { Profile } from '@prisma/client';
 
 import { db } from './database';
 

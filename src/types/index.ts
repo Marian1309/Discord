@@ -1,11 +1,7 @@
-export type Profile = {
-  id: string;
-  userId: string;
-  name: string;
-  imageUrl: string;
-  email: string;
-  createdAt: Date;
-  updatedAt: Date;
-};
+import type { Member, Profile, Server } from '@prisma/client';
 
 export type Modal = 'createServer';
+
+export type ServerWithMembersWithProfiles = Server & {
+  members: (Member & { profile: Profile })[];
+};
