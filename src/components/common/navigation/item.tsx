@@ -20,7 +20,7 @@ const NavigationItem: FC<Props> = ({ id, imageUrl, name }) => {
   const params = useParams() as { serverId: string };
 
   const handleClick = () => {
-    router.push(`/server/${id}`);
+    router.push(`/servers/${id}`);
   };
 
   return (

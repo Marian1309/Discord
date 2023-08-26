@@ -14,6 +14,8 @@ import {
 
 import type { ServerWithMembersWithProfiles } from '@/types';
 
+import useModalStore from '@/stores/use-modal';
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -28,6 +30,8 @@ type Props = {
 };
 
 const ServerHeader: FC<Props> = ({ server, role }) => {
+  const { onOpen } = useModalStore();
+
   const isAdmin = useMemo(() => {
     return role === MemberRole.ADMIN;
   }, [role]);
@@ -35,6 +39,10 @@ const ServerHeader: FC<Props> = ({ server, role }) => {
   const isModerator = useMemo(() => {
     return isAdmin || role === MemberRole.MODERATOR;
   }, [isAdmin, role]);
+
+  const handleClickInvite = () => {
+    onOpen('invite', { server });
+  };
 
   return (
     <DropdownMenu>
@@ -48,7 +56,10 @@ const ServerHeader: FC<Props> = ({ server, role }) => {
 
       <DropdownMenuContent className="w-56 space-y-[2px] text-xs font-medium text-black dark:text-neutral-400">
         {isModerator && (
-          <DropdownMenuItem className="cursor-pointer px-3 py-2 text-sm text-indigo-600 dark:text-indigo-400">
+          <DropdownMenuItem
+            className="cursor-pointer px-3 py-2 text-sm text-indigo-600 dark:text-indigo-400"
+            onClick={handleClickInvite}
+          >
             Invite People
             <UserPlus className="ml-auto h-4 w-4" />
           </DropdownMenuItem>

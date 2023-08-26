@@ -9,6 +9,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
 
 import ThemeToggle from '../theme-toggle';
+
 import NavigationAction from './action';
 import NavigationItem from './item';
 

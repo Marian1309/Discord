@@ -11,8 +11,8 @@ import { type InitialSchema, initialSchema } from '@/lib/validations';
 
 import useModalStore from '@/stores/use-modal';
 
-import FileUpload from '../forms/file-upload';
-import { Button } from '../ui/button';
+import FileUpload from '@/components/forms/file-upload';
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -20,9 +20,15 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle
-} from '../ui/dialog';
-import { Form, FormControl, FormField, FormItem, FormLabel } from '../ui/form';
-import { Input } from '../ui/input';
+} from '@/components/ui/dialog';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
 
 const CreateServerModal = () => {
   const router = useRouter();

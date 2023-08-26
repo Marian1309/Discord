@@ -30,8 +30,8 @@ const prettierConfig = {
 
     '^@/components/(.*)$',
 
-    '^[../]',
-    '^[./]'
+    '^../',
+    '^./'
   ],
 
   importOrderSeparation: true,

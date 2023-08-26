@@ -1,3 +1,5 @@
+'use server';
+
 import { currentUser, redirectToSignIn } from '@clerk/nextjs';
 import type { Profile } from '@prisma/client';
 

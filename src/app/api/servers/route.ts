@@ -21,7 +21,7 @@ const POST = async (req: NextRequest) => {
         profileId: profile.id,
         name,
         imageUrl,
-        inviteCode: nanoid(13),
+        inviteCode: nanoid(),
         channels: {
           create: [{ name: 'general', profileId: profile.id }]
         },
