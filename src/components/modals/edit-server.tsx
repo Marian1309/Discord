@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect } from 'react';
+
 import { useRouter } from 'next/navigation';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -30,9 +32,9 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 
-const CreateServerModal = () => {
+const EditServerModal = () => {
   const router = useRouter();
-  const { type, isOpen, onClose } = useModalStore();
+  const { type, isOpen, onClose, data } = useModalStore();
   const form = useForm<InitialSchema>({
     defaultValues: {
       name: '',
@@ -41,19 +43,28 @@ const CreateServerModal = () => {
     resolver: zodResolver(initialSchema)
   });
 
-  const isModalOpen = isOpen && type === 'createServer';
+  const { server } = data;
+
+  useEffect(() => {
+    if (server) {
+      form.setValue('name', server.name);
+      form.setValue('imageUrl', server.imageUrl);
+    }
+  }, [server, form]);
+
+  const isModalOpen = isOpen && type === 'editServer';
 
   const isLoading = form.formState.isSubmitting;
 
   const onSubmit = async (values: InitialSchema) => {
     try {
-      await axios.post('/api/servers', values);
+      await axios.patch(`/api/servers/${server?.id}`, values);
 
       form.reset();
       router.refresh();
       window.location.reload();
     } catch (err: unknown) {
-      toast.error('An error occurred while creating a server.');
+      toast.error('An error occurred while updating a server.');
     }
   };
 
@@ -121,7 +132,7 @@ const CreateServerModal = () => {
 
             <DialogFooter className="bg-gray-100 px-6 py-4">
               <Button variant="primary" disabled={isLoading}>
-                Create
+                Save
               </Button>
             </DialogFooter>
           </form>
@@ -131,4 +142,4 @@ const CreateServerModal = () => {
   );
 };
 
-export default CreateServerModal;
+export default EditServerModal;

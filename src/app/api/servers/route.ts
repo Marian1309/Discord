@@ -33,7 +33,7 @@ const POST = async (req: NextRequest) => {
 
     return NextResponse.json(server, { status: 200 });
   } catch (err: unknown) {
-    console.log('[SERVERS_ERROR]', err);
+    console.log('[SERVERS_POST]', err);
   }
 };
 
