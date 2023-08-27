@@ -12,7 +12,7 @@ import {
   Users
 } from 'lucide-react';
 
-import type { ServerWithMembersWithProfiles } from '@/types';
+import type { Modal, ServerWithMembersWithProfiles } from '@/types';
 
 import useModalStore from '@/stores/use-modal';
 
@@ -40,12 +40,8 @@ const ServerHeader: FC<Props> = ({ server, role }) => {
     return isAdmin || role === MemberRole.MODERATOR;
   }, [isAdmin, role]);
 
-  const handleOpenInviteModal = () => {
-    onOpen('invite', { server });
-  };
-
-  const handleOpenSettingsModal = () => {
-    onOpen('editServer', { server });
+  const handleOpenModal = (modelId: Modal) => {
+    onOpen(modelId, { server });
   };
 
   return (
@@ -62,7 +58,7 @@ const ServerHeader: FC<Props> = ({ server, role }) => {
         {isModerator && (
           <DropdownMenuItem
             className="cursor-pointer px-3 py-2 text-sm text-indigo-600 dark:text-indigo-400"
-            onClick={handleOpenInviteModal}
+            onClick={() => handleOpenModal('invite')}
           >
             Invite People
             <UserPlus className="ml-auto h-4 w-4" />
@@ -72,7 +68,7 @@ const ServerHeader: FC<Props> = ({ server, role }) => {
         {isAdmin && (
           <DropdownMenuItem
             className="cursor-pointer px-3 py-2 text-sm"
-            onClick={handleOpenSettingsModal}
+            onClick={() => handleOpenModal('editServer')}
           >
             Server Settings
             <Settings className="ml-auto h-4 w-4" />
@@ -80,7 +76,10 @@ const ServerHeader: FC<Props> = ({ server, role }) => {
         )}
 
         {isAdmin && (
-          <DropdownMenuItem className="cursor-pointer px-3 py-2 text-sm">
+          <DropdownMenuItem
+            className="cursor-pointer px-3 py-2 text-sm"
+            onClick={() => handleOpenModal('members')}
+          >
             Manage Members
             <Users className="ml-auto h-4 w-4" />
           </DropdownMenuItem>
