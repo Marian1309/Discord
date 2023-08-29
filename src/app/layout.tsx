@@ -19,8 +19,6 @@ export const metadata: Metadata = {
   },
   description:
     'Discord is the easiest way to talk over voice, video, and text. Talk, chat, hang out, and stay close with your friends and communities.',
-  authors: [{ name: 'Marian', url: 'https://github.com/Marian1309' }],
-  creator: 'Marian Pidchashyi',
   keywords: [
     'Next.js',
     'React',
@@ -39,16 +37,16 @@ const RootLayout: FC<{ children: ReactNode }> = ({ children }) => {
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning className={openSans.className}>
         <body className="bg-white dark:bg-[#313338]">
-          <HotToastProvider />
-
-          <ModalProvider />
-
           <ThemeProvider
             themes={['light', 'dark']}
             attribute="class"
             enableSystem={false}
             defaultTheme="dark"
           >
+            <HotToastProvider />
+
+            <ModalProvider />
+
             {children}
           </ThemeProvider>
         </body>

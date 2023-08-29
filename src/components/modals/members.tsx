@@ -112,11 +112,12 @@ const MembersModal = () => {
         </DialogHeader>
 
         <DialogDescription className="text-center text-zinc-500">
-          {server?.members.length} Members
+          {server?.members?.length}{' '}
+          {server?.members?.length === 1 ? 'Member' : 'Members'}
         </DialogDescription>
 
         <ScrollArea className="mt-8 max-h-[420px] px-6">
-          {server?.members.map((member) => {
+          {server?.members?.map((member) => {
             const roleIcon = roleIconMap[member.role];
 
             return (

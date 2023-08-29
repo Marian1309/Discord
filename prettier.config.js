@@ -17,10 +17,8 @@ const prettierConfig = {
 
     '<THIRD_PARTY_MODULES>',
 
-    '@/env',
-
     '^@/types',
-
+    '@/env',
     '^@/api',
 
     '^@/lib/(.*)$',
@@ -36,7 +34,6 @@ const prettierConfig = {
 
   importOrderSeparation: true,
   importOrderSortSpecifiers: true,
-
   plugins: ['@trivago/prettier-plugin-sort-imports']
 };
 
