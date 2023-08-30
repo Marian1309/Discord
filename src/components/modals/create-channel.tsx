@@ -1,6 +1,6 @@
 'use client';
 
-import type { FC } from 'react';
+import { type FC, useEffect } from 'react';
 
 import { useParams, useRouter } from 'next/navigation';
 
@@ -46,6 +46,7 @@ const CreateChannelModal: FC = () => {
   const router = useRouter();
   const params = useParams();
   const { type: modalType, isOpen, onClose, data } = useModalStore();
+  const { channelType } = data;
 
   const isModalOpen = isOpen && modalType === 'createChannel';
 
@@ -58,6 +59,14 @@ const CreateChannelModal: FC = () => {
   });
 
   const isLoading = form.formState.isSubmitting;
+
+  useEffect(() => {
+    if (channelType) {
+      form.setValue('type', channelType);
+    } else {
+      form.setValue('type', ChannelType.TEXT);
+    }
+  }, [channelType, form]);
 
   const onSubmit = async (values: CreateChannelSchema) => {
     try {
