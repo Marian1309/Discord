@@ -1,4 +1,3 @@
-import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
 import { log } from 'console';
@@ -6,10 +5,9 @@ import { log } from 'console';
 import currentProfile from '@/lib/current-profile';
 import { db } from '@/lib/database';
 
-const PATCH = async (
-  req: NextRequest,
-  { params }: { params: { serverId: string } }
-) => {
+import type { ServerIdFn } from './types';
+
+const PATCH: ServerIdFn = async (req, { params }) => {
   try {
     const profile = await currentProfile();
 
@@ -40,4 +38,26 @@ const PATCH = async (
   }
 };
 
-export { PATCH };
+const DELETE: ServerIdFn = async (req, { params }) => {
+  try {
+    const profile = await currentProfile();
+
+    if (!profile) {
+      return new NextResponse('Unauthorized', { status: 401 });
+    }
+
+    const server = await db.server.delete({
+      where: {
+        id: params.serverId,
+        profileId: profile.id
+      }
+    });
+
+    return NextResponse.json(server, { status: 200 });
+  } catch (err: unknown) {
+    log('[SERVER_ID_DELETE]', err);
+    return new NextResponse('Internal Error', { status: 500 });
+  }
+};
+
+export { PATCH, DELETE };

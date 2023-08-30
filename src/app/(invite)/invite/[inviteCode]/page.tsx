@@ -19,7 +19,7 @@ const InvideCodePage = async ({ params }: Props) => {
   }
 
   if (!params.inviteCode) {
-    return redirect('/');
+    redirect('/');
   }
 
   const existingServer = await db.server.findFirst({
@@ -34,7 +34,7 @@ const InvideCodePage = async ({ params }: Props) => {
   });
 
   if (existingServer) {
-    return redirect(`/servers/${existingServer.id}`);
+    redirect(`/servers/${existingServer.id}`);
   }
 
   const server = await db.server.update({
@@ -49,7 +49,7 @@ const InvideCodePage = async ({ params }: Props) => {
   });
 
   if (server) {
-    return redirect(`/servers/${server.id}`);
+    redirect(`/servers/${server.id}`);
   }
 
   return null;

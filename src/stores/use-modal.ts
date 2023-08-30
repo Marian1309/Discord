@@ -1,15 +1,15 @@
-import type { Server } from '@prisma/client';
+import type { ChannelType, Server } from '@prisma/client';
 import { create } from 'zustand';
 
 import type { Modal } from '@/types';
 
+type ModalData = { server?: Server; channelType?: ChannelType };
+
 type ModalStore = {
   type: Modal | null;
-  data: {
-    server?: Server;
-  };
+  data: ModalData;
   isOpen: boolean;
-  onOpen: (type: Modal, data?: { server?: Server }) => void;
+  onOpen: (type: Modal, data?: ModalData) => void;
   onClose: () => void;
 };
 

@@ -1,5 +1,7 @@
 'use client';
 
+import type { FC } from 'react';
+
 import { useRouter } from 'next/navigation';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -30,7 +32,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 
-const CreateServerModal = () => {
+const CreateServerModal: FC = () => {
   const router = useRouter();
   const { type, isOpen, onClose } = useModalStore();
   const form = useForm<InitialSchema>({

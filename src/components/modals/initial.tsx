@@ -1,5 +1,6 @@
 'use client';
 
+import type { FC } from 'react';
 import { useEffect, useState } from 'react';
 
 import { useRouter } from 'next/navigation';
@@ -30,7 +31,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 
-const InitialModal = () => {
+const InitialModal: FC = () => {
   const [isMounted, setIsMounted] = useState(false);
   const router = useRouter();
   const form = useForm<InitialSchema>({

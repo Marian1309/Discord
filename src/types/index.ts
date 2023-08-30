@@ -5,7 +5,9 @@ export type Modal =
   | 'invite'
   | 'editServer'
   | 'members'
-  | 'createChannel';
+  | 'createChannel'
+  | 'leaveServer'
+  | 'deleteServer';
 
 export type ServerWithMembersWithProfiles = Server & {
   members: (Member & { profile: Profile })[];

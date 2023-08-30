@@ -1,5 +1,6 @@
 'use client';
 
+import type { FC } from 'react';
 import { useState } from 'react';
 
 import axios from 'axios';
@@ -20,7 +21,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
-const InviteModal = () => {
+const InviteModal: FC = () => {
   const { type, isOpen, onClose, data, onOpen } = useModalStore();
   const origin = useOrigin();
   const { server } = data;

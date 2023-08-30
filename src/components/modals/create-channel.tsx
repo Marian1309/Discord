@@ -1,5 +1,7 @@
 'use client';
 
+import type { FC } from 'react';
+
 import { useParams, useRouter } from 'next/navigation';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -40,18 +42,17 @@ import {
   SelectValue
 } from '@/components/ui/select';
 
-const CreateChannelModal = () => {
+const CreateChannelModal: FC = () => {
   const router = useRouter();
   const params = useParams();
   const { type: modalType, isOpen, onClose, data } = useModalStore();
 
   const isModalOpen = isOpen && modalType === 'createChannel';
-  const { channelType } = data;
 
   const form = useForm<CreateChannelSchema>({
     defaultValues: {
       name: '',
-      type: channelType || ChannelType.TEXT
+      type: data.channelType || ChannelType.TEXT
     },
     resolver: zodResolver(createChannelSchema)
   });
@@ -73,7 +74,7 @@ const CreateChannelModal = () => {
       router.refresh();
       onClose();
     } catch (err: unknown) {
-      toast.error('An error occurred while creating a server.');
+      toast.error('An error occurred while creating a channel.');
     }
   };
 

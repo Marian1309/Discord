@@ -1,38 +1,48 @@
 import { NextResponse } from 'next/server';
 
 import { log } from 'console';
-import { nanoid } from 'nanoid';
 
 import currentProfile from '@/lib/current-profile';
 import { db } from '@/lib/database';
 
 import type { ServerIdFn } from '../types';
 
-const PATCH: ServerIdFn = async (_, { params }) => {
+const PATCH: ServerIdFn = async (req, { params }) => {
   try {
     const profile = await currentProfile();
 
     if (!profile) {
-      return new Response('Unauthorized', { status: 401 });
+      return new NextResponse('Unauthorized', { status: 401 });
     }
 
     if (!params.serverId) {
-      return new Response('Missing server ID', { status: 400 });
+      return new NextResponse('Missing serverId', { status: 400 });
     }
 
     const server = await db.server.update({
       where: {
         id: params.serverId,
-        profileId: profile.id
+        profileId: {
+          not: profile.id
+        },
+        members: {
+          some: {
+            profileId: profile.id
+          }
+        }
       },
       data: {
-        inviteCode: nanoid()
+        members: {
+          deleteMany: {
+            profileId: profile.id
+          }
+        }
       }
     });
 
     return NextResponse.json(server, { status: 200 });
   } catch (err: unknown) {
-    log('[SERVER_ID_PATCH]', err);
+    log('[SERVER_ID_LEAVE_PATCH]', err);
     return new NextResponse('Internal Error', { status: 500 });
   }
 };

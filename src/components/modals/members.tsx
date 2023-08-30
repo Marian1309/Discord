@@ -1,5 +1,6 @@
 'use client';
 
+import type { FC } from 'react';
 import { useState } from 'react';
 
 import { useRouter } from 'next/navigation';
@@ -50,7 +51,7 @@ const roleIconMap = {
   ADMIN: <ShieldAlert className="h-4 w-4 text-rose-500" />
 };
 
-const MembersModal = () => {
+const MembersModal: FC = () => {
   const router = useRouter();
   const { type, isOpen, onClose, data, onOpen } = useModalStore();
   const [loadingId, setLoadingId] = useState('');

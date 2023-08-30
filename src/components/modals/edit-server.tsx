@@ -1,5 +1,6 @@
 'use client';
 
+import type { FC } from 'react';
 import { useEffect } from 'react';
 
 import { useRouter } from 'next/navigation';
@@ -32,7 +33,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 
-const EditServerModal = () => {
+const EditServerModal: FC = () => {
   const router = useRouter();
   const { type, isOpen, onClose, data } = useModalStore();
   const form = useForm<InitialSchema>({
