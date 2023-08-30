@@ -1,25 +1,68 @@
 import type { Metadata } from 'next';
+import { redirect } from 'next/navigation';
 
+import { redirectToSignIn } from '@clerk/nextjs';
+
+import currentProfile from '@/lib/current-profile';
 import { db } from '@/lib/database';
 
-// export const generateMetadata = async ({
-//   params
-// }: {
-//   params: { serverId: string };
-// }): Promise<Metadata> => {
-//   const server = await db.server.findFirst({
-//     where: {
-//       id: params.serverId
-//     }
-//   });
+export const generateMetadata = async ({
+  params
+}: {
+  params: { serverId: string };
+}): Promise<Metadata> => {
+  const server = await db.server.findFirst({
+    where: {
+      id: params.serverId
+    }
+  });
 
-//   return {
-//     title: server?.name
-//   };
-// };
+  return {
+    title: server?.name
+  };
+};
 
-const ServerIdPage = async ({ params }: { params: { serverId: string } }) => {
-  return <p className="p-4">{params.serverId}</p>;
+type Props = {
+  params: {
+    serverId: string;
+  };
+};
+
+const ServerIdPage = async ({ params }: Props) => {
+  const profile = await currentProfile();
+
+  if (!profile) {
+    return redirectToSignIn();
+  }
+
+  const server = await db.server.findUnique({
+    where: {
+      id: params.serverId,
+      members: {
+        some: {
+          profileId: profile.id
+        }
+      }
+    },
+    include: {
+      channels: {
+        where: {
+          name: 'general'
+        },
+        orderBy: {
+          createdAt: 'asc'
+        }
+      }
+    }
+  });
+
+  const initialChannel = server?.channels[0];
+
+  if (initialChannel?.name !== 'general') {
+    return null;
+  }
+
+  return redirect(`/servers/${params.serverId}/channels/${initialChannel.id}`);
 };
 
 export default ServerIdPage;

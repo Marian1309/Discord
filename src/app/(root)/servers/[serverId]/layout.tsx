@@ -7,7 +7,7 @@ import { redirectToSignIn } from '@clerk/nextjs';
 import currentProfile from '@/lib/current-profile';
 import { db } from '@/lib/database';
 
-import ServerSidebar from '@/components/common/server/sidebar';
+import { ServerSidebar } from '@/components/server';
 
 type Props = {
   children: ReactNode;

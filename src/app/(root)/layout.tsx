@@ -1,6 +1,6 @@
 import { type FC, type ReactNode } from 'react';
 
-import { NavigationSidebar } from '@/components/common/navigation';
+import { NavigationSidebar } from '@/components/navigation';
 
 const RootLayout: FC<{ children: ReactNode }> = async ({ children }) => {
   return (

@@ -10,7 +10,7 @@ import { ShieldAlert, ShieldCheck } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 
-import UserAvatar from '../user-avatar';
+import UserAvatar from '../common/user-avatar';
 
 type Props = {
   member: Member & { profile: Profile };

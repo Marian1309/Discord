@@ -18,7 +18,7 @@ import { cn } from '@/lib/utils';
 
 import useModalStore from '@/stores/use-modal';
 
-import ActionTooltip from '../action-tooltip';
+import ActionTooltip from '../common/action-tooltip';
 
 type Props = {
   channel: Channel;
