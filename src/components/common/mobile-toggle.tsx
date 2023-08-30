@@ -16,7 +16,7 @@ const MobileToggle: FC<Props> = ({ serverId }) => {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="ghost" size="icon" className="md:hidden">
+        <Button variant="ghost" size="icon" className="mr-2 md:hidden">
           <Menu />
         </Button>
       </SheetTrigger>
