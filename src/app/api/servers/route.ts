@@ -9,13 +9,13 @@ import { db } from '@/lib/database';
 
 const POST = async (req: NextRequest) => {
   try {
-    const { name, imageUrl } = await req.json();
-
     const profile = await currentProfile();
 
     if (!profile) {
       return new NextResponse('Unauthorized', { status: 401 });
     }
+
+    const { name, imageUrl } = await req.json();
 
     const server = await db.server.create({
       data: {
@@ -35,6 +35,7 @@ const POST = async (req: NextRequest) => {
     return NextResponse.json(server, { status: 200 });
   } catch (err: unknown) {
     log('[SERVERS_POST]', err);
+    return new NextResponse('Internal Error', { status: 500 });
   }
 };
 

@@ -5,7 +5,9 @@ import { useEffect, useState } from 'react';
 
 import CreateChannelModal from '@/components/modals/create-channel';
 import CreateServerModal from '@/components/modals/create-server';
+import DeleteChannelModal from '@/components/modals/delete-channel';
 import DeleteServerModal from '@/components/modals/delete-server';
+import EditChannelModal from '@/components/modals/edit-channel';
 import EditServerModal from '@/components/modals/edit-server';
 import InviteModal from '@/components/modals/invite';
 import LeaveServerModal from '@/components/modals/leave-server';
@@ -33,6 +35,8 @@ const ModalProvider: FC = () => {
       <CreateChannelModal />
       <LeaveServerModal />
       <DeleteServerModal />
+      <DeleteChannelModal />
+      <EditChannelModal />
     </>
   );
 };

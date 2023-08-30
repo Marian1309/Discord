@@ -1,15 +1,14 @@
-import { type NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 
 import type { MemberRole } from '@prisma/client';
 import { log } from 'console';
 
+import type { FunctionWithMemberIdInParams } from '@/types/api';
+
 import currentProfile from '@/lib/current-profile';
 import { db } from '@/lib/database';
 
-const PATCH = async (
-  req: NextRequest,
-  { params }: { params: { memberId: string } }
-) => {
+const PATCH: FunctionWithMemberIdInParams = async (req, { params }) => {
   try {
     const profile = await currentProfile();
 
@@ -69,10 +68,7 @@ const PATCH = async (
   }
 };
 
-const DELETE = async (
-  req: NextRequest,
-  { params }: { params: { memberId: string } }
-) => {
+const DELETE: FunctionWithMemberIdInParams = async (req, { params }) => {
   try {
     const profile = await currentProfile();
 

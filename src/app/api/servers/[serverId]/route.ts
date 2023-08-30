@@ -2,12 +2,12 @@ import { NextResponse } from 'next/server';
 
 import { log } from 'console';
 
+import type { FunctionWithServerIdInParams } from '@/types/api';
+
 import currentProfile from '@/lib/current-profile';
 import { db } from '@/lib/database';
 
-import type { ServerIdFn } from './types';
-
-const PATCH: ServerIdFn = async (req, { params }) => {
+const PATCH: FunctionWithServerIdInParams = async (req, { params }) => {
   try {
     const profile = await currentProfile();
 
@@ -38,7 +38,7 @@ const PATCH: ServerIdFn = async (req, { params }) => {
   }
 };
 
-const DELETE: ServerIdFn = async (req, { params }) => {
+const DELETE: FunctionWithServerIdInParams = async (req, { params }) => {
   try {
     const profile = await currentProfile();
 

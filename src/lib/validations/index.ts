@@ -7,7 +7,7 @@ export const initialSchema = z.object({
 });
 export type InitialSchema = z.infer<typeof initialSchema>;
 
-export const createChannelSchema = z.object({
+export const channelSchema = z.object({
   name: z
     .string()
     .min(1, {
@@ -18,4 +18,4 @@ export const createChannelSchema = z.object({
     }),
   type: z.nativeEnum(ChannelType)
 });
-export type CreateChannelSchema = z.infer<typeof createChannelSchema>;
+export type ChannelSchema = z.infer<typeof channelSchema>;

@@ -45,7 +45,7 @@ const ServerChannel: FC<Props> = ({ channel, server, role }) => {
 
   const onAction = (e: MouseEvent, action: Modal) => {
     e.stopPropagation();
-    onOpen(action, { server, channelType: channel });
+    onOpen(action, { server, channel });
   };
 
   return (

@@ -2,7 +2,7 @@
 
 import { type FC, useEffect } from 'react';
 
-import { useParams, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ChannelType } from '@prisma/client';
@@ -20,7 +20,6 @@ import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle
@@ -42,13 +41,12 @@ import {
   SelectValue
 } from '@/components/ui/select';
 
-const CreateChannelModal: FC = () => {
+const EditChannelModal: FC = () => {
   const router = useRouter();
-  const params = useParams();
   const { type: modalType, isOpen, onClose, data } = useModalStore();
-  const { channelType } = data;
+  const { channel, server } = data;
 
-  const isModalOpen = isOpen && modalType === 'createChannel';
+  const isModalOpen = isOpen && modalType === 'editChannel';
 
   const form = useForm<ChannelSchema>({
     defaultValues: {
@@ -61,29 +59,28 @@ const CreateChannelModal: FC = () => {
   const isLoading = form.formState.isSubmitting;
 
   useEffect(() => {
-    if (channelType) {
-      form.setValue('type', channelType);
-    } else {
-      form.setValue('type', ChannelType.TEXT);
+    if (channel) {
+      form.setValue('name', channel.name);
+      form.setValue('type', channel.type);
     }
-  }, [channelType, form]);
+  }, [channel, form]);
 
   const onSubmit = async (values: ChannelSchema) => {
     try {
       const url = queryString.stringifyUrl({
-        url: '/api/channels',
+        url: `/api/channels/${channel?.id}`,
         query: {
-          serverId: params?.serverId
+          serverId: server?.id
         }
       });
 
-      await axios.post(url, values);
+      await axios.patch(url, values);
 
       form.reset();
       router.refresh();
       onClose();
     } catch (err: unknown) {
-      toast.error('An error occurred while creating a channel.');
+      toast.error('An error occurred while editing a channel.');
     }
   };
 
@@ -97,13 +94,8 @@ const CreateChannelModal: FC = () => {
       <DialogContent className="overflow-hidden bg-white p-0 text-black">
         <DialogHeader className="px-6 pt-8">
           <DialogTitle className="text-center text-2xl font-bold">
-            Create Channel
+            Edit Channel
           </DialogTitle>
-
-          <DialogDescription className="text-center text-zinc-500">
-            Give your description a personality with a name and an image. You
-            can always change it later.
-          </DialogDescription>
         </DialogHeader>
 
         <Form {...form}>
@@ -117,7 +109,6 @@ const CreateChannelModal: FC = () => {
                     <FormLabel className="text-xs font-bold uppercase text-zinc-500 dark:text-secondary/70">
                       Channel name
                     </FormLabel>
-
                     <FormControl>
                       <Input
                         disabled={isLoading}
@@ -126,11 +117,11 @@ const CreateChannelModal: FC = () => {
                         {...field}
                       />
                     </FormControl>
-
                     <FormMessage />
                   </FormItem>
                 )}
               />
+
               <FormField
                 control={form.control}
                 name="type"
@@ -170,7 +161,7 @@ const CreateChannelModal: FC = () => {
 
             <DialogFooter className="bg-gray-100 px-6 py-4">
               <Button variant="primary" disabled={isLoading}>
-                Create
+                Save
               </Button>
             </DialogFooter>
           </form>
@@ -180,4 +171,4 @@ const CreateChannelModal: FC = () => {
   );
 };
 
-export default CreateChannelModal;
+export default EditChannelModal;

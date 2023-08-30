@@ -3,12 +3,12 @@ import { NextResponse } from 'next/server';
 import { log } from 'console';
 import { nanoid } from 'nanoid';
 
+import type { FunctionWithServerIdInParams } from '@/types/api';
+
 import currentProfile from '@/lib/current-profile';
 import { db } from '@/lib/database';
 
-import type { ServerIdFn } from '../types';
-
-const PATCH: ServerIdFn = async (_, { params }) => {
+const PATCH: FunctionWithServerIdInParams = async (_, { params }) => {
   try {
     const profile = await currentProfile();
 

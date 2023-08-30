@@ -17,7 +17,7 @@ import {
   ShieldCheck,
   ShieldQuestion
 } from 'lucide-react';
-import qs from 'query-string';
+import queryString from 'query-string';
 import { toast } from 'react-hot-toast';
 
 import type { ServerWithMembersWithProfiles } from '@/types';
@@ -63,7 +63,7 @@ const MembersModal: FC = () => {
     try {
       setLoadingId(memberId);
 
-      const url = qs.stringifyUrl({
+      const url = queryString.stringifyUrl({
         url: `/api/members/${memberId}`,
         query: {
           serverId: server.id
@@ -85,7 +85,7 @@ const MembersModal: FC = () => {
     try {
       setLoadingId(memberId);
 
-      const url = qs.stringifyUrl({
+      const url = queryString.stringifyUrl({
         url: `/api/members/${memberId}`,
         query: {
           serverId: server.id
