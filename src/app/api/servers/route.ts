@@ -1,6 +1,7 @@
 import { type NextRequest, NextResponse } from 'next/server';
 
 import { MemberRole } from '@prisma/client';
+import { log } from 'console';
 import { nanoid } from 'nanoid';
 
 import currentProfile from '@/lib/current-profile';
@@ -33,7 +34,7 @@ const POST = async (req: NextRequest) => {
 
     return NextResponse.json(server, { status: 200 });
   } catch (err: unknown) {
-    console.log('[SERVERS_POST]', err);
+    log('[SERVERS_POST]', err);
   }
 };
 

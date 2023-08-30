@@ -1,6 +1,7 @@
 import { type NextRequest, NextResponse } from 'next/server';
 
 import type { MemberRole } from '@prisma/client';
+import { log } from 'console';
 
 import currentProfile from '@/lib/current-profile';
 import { db } from '@/lib/database';
@@ -63,7 +64,7 @@ const PATCH = async (
 
     return NextResponse.json(server, { status: 200 });
   } catch (err: unknown) {
-    console.log('[MEMBER_ID_PATCH]', err);
+    log('[MEMBER_ID_PATCH]', err);
     return new NextResponse('Internal Error', { status: 500 });
   }
 };
@@ -120,7 +121,7 @@ const DELETE = async (
 
     return NextResponse.json(server, { status: 200 });
   } catch (err: unknown) {
-    console.log('[MEMBER_ID_DELETE]', err);
+    log('[MEMBER_ID_DELETE]', err);
     return new NextResponse('Internal Error', { status: 500 });
   }
 };
