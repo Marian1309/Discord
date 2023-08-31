@@ -8,6 +8,7 @@ import { db } from '@/lib/database';
 
 import ChatHeader from '@/components/chat/header';
 import ChatInput from '@/components/chat/input';
+import ChatMessages from '@/components/chat/messages';
 
 type Props = {
   params: {
@@ -48,7 +49,17 @@ const ChannelIdPage = async ({ params }: Props) => {
         type="channel"
       />
 
-      <div className="flex-1">Future Messages</div>
+      <ChatMessages
+        member={member}
+        name={channel.name}
+        chatId={channel.id}
+        type="channel"
+        apiUrl="/api/messages"
+        socketUrl="/api/socket/messages"
+        socketQuery={{ channelId: channel.id, serverId: channel.serverId }}
+        paramKey="channelId"
+        paramValue={channel.id}
+      />
 
       {channel.type === ChannelType.TEXT && (
         <ChatInput

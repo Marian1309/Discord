@@ -15,7 +15,8 @@ export type Modal =
   | 'editChannel'
   | 'deleteChannel'
   | 'messageFile'
-  | 'deleteChannel';
+  | 'deleteChannel'
+  | 'deleteMessage';
 
 export type ServerWithMembersWithProfiles = Server & {
   members: (Member & { profile: Profile })[];

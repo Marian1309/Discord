@@ -8,6 +8,7 @@ import { openSans } from '@/lib/fonts';
 
 import HotToastProvider from '@/components/providers/hot-toast';
 import ModalProvider from '@/components/providers/modals';
+import ReactQueryProvider from '@/components/providers/react-query';
 import SocketProvider from '@/components/providers/socket';
 import ThemeProvider from '@/components/providers/theme';
 
@@ -47,9 +48,11 @@ const RootLayout: FC<{ children: ReactNode }> = ({ children }) => {
             <HotToastProvider />
 
             <SocketProvider>
-              <ModalProvider />
+              <ReactQueryProvider>
+                <ModalProvider />
 
-              {children}
+                {children}
+              </ReactQueryProvider>
             </SocketProvider>
           </ThemeProvider>
         </body>
