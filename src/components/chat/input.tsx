@@ -11,11 +11,12 @@ import queryString from 'query-string';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 
-import type { ChatInputSchena } from '@/lib/validations';
+import type { ChatInputSchema } from '@/lib/validations';
 import { chatInputSchema } from '@/lib/validations';
 
 import useModalStore from '@/stores/use-modal';
 
+import EmojiPicker from '@/components/common/emoji-picker';
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 
@@ -29,7 +30,7 @@ type Props = {
 const ChatInput: FC<Props> = ({ apiUrl, query, name, type }) => {
   const router = useRouter();
   const { onOpen } = useModalStore();
-  const form = useForm<ChatInputSchena>({
+  const form = useForm<ChatInputSchema>({
     defaultValues: {
       content: ''
     },
@@ -38,7 +39,7 @@ const ChatInput: FC<Props> = ({ apiUrl, query, name, type }) => {
 
   const { isLoading } = form.formState;
 
-  const onSubmit = async (values: ChatInputSchena) => {
+  const onSubmit = async (values: ChatInputSchema) => {
     try {
       const url = queryString.stringifyUrl({
         url: apiUrl,
@@ -81,11 +82,11 @@ const ChatInput: FC<Props> = ({ apiUrl, query, name, type }) => {
                     {...field}
                   />
                   <div className="absolute right-8 top-7">
-                    {/* <EmojiPicker
+                    <EmojiPicker
                       onChange={(emoji: string) =>
                         field.onChange(`${field.value} ${emoji}`)
                       }
-                    /> */}
+                    />
                   </div>
                 </div>
               </FormControl>

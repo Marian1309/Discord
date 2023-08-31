@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation';
 
 import { redirectToSignIn } from '@clerk/nextjs';
+import { ChannelType } from '@prisma/client';
 
 import currentProfile from '@/lib/current-profile';
 import { db } from '@/lib/database';
@@ -40,7 +41,7 @@ const ChannelIdPage = async ({ params }: Props) => {
   }
 
   return (
-    <div className="flex h-full flex-col bg-white dark:bg-[#313338]">
+    <div className="flex h-mobile flex-col bg-white dark:bg-[#313338]">
       <ChatHeader
         serverId={channel.serverId}
         name={channel.name}
@@ -49,12 +50,14 @@ const ChannelIdPage = async ({ params }: Props) => {
 
       <div className="flex-1">Future Messages</div>
 
-      <ChatInput
-        name={channel.name}
-        type="channel"
-        apiUrl="/api/socket/messages"
-        query={{ channelId: channel.id, serverId: channel.serverId }}
-      />
+      {channel.type === ChannelType.TEXT && (
+        <ChatInput
+          name={channel.name}
+          type="channel"
+          apiUrl="/api/socket/messages"
+          query={{ channelId: channel.id, serverId: channel.serverId }}
+        />
+      )}
     </div>
   );
 };

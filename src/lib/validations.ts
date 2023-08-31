@@ -23,4 +23,9 @@ export type ChannelSchema = z.infer<typeof channelSchema>;
 export const chatInputSchema = z.object({
   content: z.string().min(1)
 });
-export type ChatInputSchena = z.infer<typeof chatInputSchema>;
+export type ChatInputSchema = z.infer<typeof chatInputSchema>;
+
+export const chatFileSchema = z.object({
+  fileUrl: z.string().min(1, { message: 'Attachment is requird.' })
+});
+export type ChatFileSchema = z.infer<typeof chatFileSchema>;
