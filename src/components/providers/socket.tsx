@@ -1,13 +1,18 @@
 'use client';
 
 import type { FC, ReactNode } from 'react';
-import { useEffect, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 
 import { io as ClientIO } from 'socket.io-client';
 
+import type { SocketContextType } from '@/types';
+
 import env from '@/env';
 
-import SocketContext from '@/context/socket';
+export const SocketContext = createContext<SocketContextType>({
+  socket: null,
+  isConnected: false
+});
 
 type Props = {
   children: ReactNode;

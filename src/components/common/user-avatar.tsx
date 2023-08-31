@@ -11,7 +11,7 @@ type Props = {
 
 const UserAvatar: FC<Props> = ({ src, className }) => {
   return (
-    <Avatar className={cn('h-7 md:h-10 md:w-10', className)}>
+    <Avatar className={cn('h-7 w-8 md:h-10 md:w-10', className)}>
       <AvatarImage src={src} />
     </Avatar>
   );

@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import SocketContext from '@/context/socket';
+import { SocketContext } from '@/components/providers/socket';
 
 const useSocket = () => {
   return useContext(SocketContext);
