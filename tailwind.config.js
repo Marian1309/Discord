@@ -12,7 +12,7 @@ module.exports = {
         xs: '375px'
       },
       height: {
-        mobile: '100lvh'
+        mobile: '100dvh'
       },
 
       colors: {
