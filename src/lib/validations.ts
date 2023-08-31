@@ -19,3 +19,8 @@ export const channelSchema = z.object({
   type: z.nativeEnum(ChannelType)
 });
 export type ChannelSchema = z.infer<typeof channelSchema>;
+
+export const chatInputSchema = z.object({
+  content: z.string().min(1)
+});
+export type ChatInputSchena = z.infer<typeof chatInputSchema>;
