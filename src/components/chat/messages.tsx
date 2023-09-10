@@ -122,7 +122,7 @@ const ChatMessages: FC<Props> = ({
                 content={message.content}
                 fileUrl={message.fileUrl}
                 deleted={message.deleted}
-                timestamp={formatDate(message.createdAt, 'd MMM YYYY, HH:mm')}
+                timestamp={formatDate(message.createdAt, 'D MMM YYYY, HH:mm')}
                 isUpdated={message.updatedAt !== message.createdAt}
                 socketUrl={socketUrl}
                 socketQuery={socketQuery}

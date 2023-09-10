@@ -137,6 +137,7 @@ export const ChatItem = ({
         >
           <UserAvatar src={member.profile.imageUrl} />
         </div>
+
         <div className="flex w-full flex-col">
           <div className="flex items-center gap-x-2">
             <div className="flex items-center">
@@ -146,14 +147,17 @@ export const ChatItem = ({
               >
                 {member.profile.name}
               </span>
+
               <ActionTooltip label={member.role}>
                 {roleIconMap[member.role]}
               </ActionTooltip>
             </div>
+
             <span className="text-xs text-zinc-500 dark:text-zinc-400">
               {timestamp}
             </span>
           </div>
+
           {isImage && (
             <a
               href={fileUrl}
@@ -182,6 +186,7 @@ export const ChatItem = ({
               </a>
             </div>
           )}
+
           {!fileUrl && !isEditing && (
             <p
               className={cn(
@@ -198,6 +203,7 @@ export const ChatItem = ({
               )}
             </p>
           )}
+
           {!fileUrl && isEditing && (
             <Form {...form}>
               <form
@@ -222,10 +228,12 @@ export const ChatItem = ({
                     </FormItem>
                   )}
                 />
+
                 <Button disabled={isLoading} size="sm" variant="primary">
                   Save
                 </Button>
               </form>
+
               <span className="mt-1 text-[10px] text-zinc-400">
                 Press escape to cancel, enter to save
               </span>
@@ -233,6 +241,7 @@ export const ChatItem = ({
           )}
         </div>
       </div>
+
       {canDeleteMessage && (
         <div className="absolute -top-2 right-5 hidden items-center gap-x-2 rounded-sm border bg-white p-1 group-hover:flex dark:bg-zinc-800">
           {canEditMessage && (
@@ -243,6 +252,7 @@ export const ChatItem = ({
               />
             </ActionTooltip>
           )}
+
           <ActionTooltip label="Delete">
             <Trash
               onClick={() =>
