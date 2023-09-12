@@ -1,10 +1,9 @@
 'use client';
 
-import type { FC } from 'react';
+import { type FC, useRef } from 'react';
 
 import { useRouter } from 'next/navigation';
 
-import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
 import { Plus, SendHorizonal } from 'lucide-react';
 import queryString from 'query-string';
@@ -12,7 +11,6 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 
 import type { ChatInputSchema } from '@/lib/validations';
-import { chatInputSchema } from '@/lib/validations';
 
 import useModalStore from '@/stores/use-modal';
 
@@ -28,18 +26,25 @@ type Props = {
 };
 
 const ChatInput: FC<Props> = ({ apiUrl, query, name, type }) => {
+  const ref = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const { onOpen } = useModalStore();
   const form = useForm<ChatInputSchema>({
     defaultValues: {
       content: ''
-    },
-    resolver: zodResolver(chatInputSchema)
+    }
   });
 
   const { isLoading } = form.formState;
 
+  ref.current?.focus();
+
   const onSubmit = async (values: ChatInputSchema) => {
+    if (values.content.length === 0) {
+      toast.error('Please type something.');
+      return ref.current?.focus();
+    }
+
     try {
       const url = queryString.stringifyUrl({
         url: apiUrl,
@@ -80,6 +85,7 @@ const ChatInput: FC<Props> = ({ apiUrl, query, name, type }) => {
                       type === 'conversation' ? name : `#${name}`
                     }`}
                     {...field}
+                    ref={ref}
                   />
                   <div className="absolute right-8 top-7 flex gap-x-3">
                     <EmojiPicker
@@ -89,10 +95,7 @@ const ChatInput: FC<Props> = ({ apiUrl, query, name, type }) => {
                     />
 
                     <button type="submit">
-                      <SendHorizonal
-                        className="cursor-pointer"
-                        color="rgb(212 212 216)"
-                      />
+                      <SendHorizonal className="cursor-pointer" />
                     </button>
                   </div>
                 </div>

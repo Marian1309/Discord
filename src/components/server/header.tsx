@@ -51,8 +51,6 @@ const ServerHeader: FC<Props> = ({ server, role }) => {
     return screenWidth > 600;
   }, [screenWidth]);
 
-  console.log(isMobileWidth);
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="focus:outline-none" asChild>

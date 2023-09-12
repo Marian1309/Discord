@@ -1,11 +1,13 @@
 'use client';
 
-import type { FC } from 'react';
+import { type FC, useMemo, useState } from 'react';
 
 import emojiData from '@emoji-mart/data';
 import Picker from '@emoji-mart/react';
 import { Smile } from 'lucide-react';
 import { useTheme } from 'next-themes';
+
+import { handleWidth } from '@/lib/utils';
 
 import {
   Popover,
@@ -19,22 +21,31 @@ type Props = {
 
 const EmojiPicker: FC<Props> = ({ onChange }) => {
   const { resolvedTheme } = useTheme();
+  const [screenWidth] = useState(handleWidth());
+
+  const isMobileWidth = useMemo(() => {
+    return screenWidth < 600;
+  }, [screenWidth]);
 
   return (
     <Popover>
       <PopoverTrigger>
-        <Smile className="text-zinc-500 transition hover:text-zinc-600 dark:text-zinc-400 dark:hover:text-zinc-300" />
+        <Smile />
       </PopoverTrigger>
 
       <PopoverContent
         side="right"
         sideOffset={40}
-        className="mb-16 mr-10 border-none bg-transparent shadow-none drop-shadow-none"
+        className="mb-[72px] border-none bg-transparent shadow-none drop-shadow-none"
       >
         <Picker
           theme={resolvedTheme}
           data={emojiData}
           onEmojiSelect={(emoji: any) => onChange(emoji.native)}
+          emojiSize={20}
+          emojiButtonSize={30}
+          perLine={isMobileWidth ? 7 : 10}
+          set="google"
         />
       </PopoverContent>
     </Popover>
