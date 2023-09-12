@@ -20,8 +20,6 @@ const ModalProvider: FC = () => {
 
   useEffect(() => {
     setIsMounted(true);
-
-    return () => setIsMounted(false);
   }, []);
 
   if (!isMounted) {

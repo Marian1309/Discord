@@ -1,8 +1,8 @@
 'use client';
 
-import useSocket from '@/hooks/use-socket';
-
 import { Badge } from '@/components/ui/badge';
+
+import { useSocket } from '../providers/socket';
 
 const SocketIndicator = () => {
   const { isConnected } = useSocket();

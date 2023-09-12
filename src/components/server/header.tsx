@@ -1,6 +1,6 @@
 'use client';
 
-import { type FC, useMemo } from 'react';
+import { type FC, useMemo, useState } from 'react';
 
 import { MemberRole } from '@prisma/client';
 import {
@@ -13,6 +13,8 @@ import {
 } from 'lucide-react';
 
 import type { Modal, ServerWithMembersWithProfiles } from '@/types';
+
+import { cn, handleWidth } from '@/lib/utils';
 
 import useModalStore from '@/stores/use-modal';
 
@@ -31,6 +33,7 @@ type Props = {
 
 const ServerHeader: FC<Props> = ({ server, role }) => {
   const { onOpen } = useModalStore();
+  const [screenWidth] = useState(handleWidth());
 
   const isAdmin = useMemo(() => {
     return role === MemberRole.ADMIN;
@@ -44,13 +47,19 @@ const ServerHeader: FC<Props> = ({ server, role }) => {
     onOpen(modelId, { server });
   };
 
+  const isMobileWidth = useMemo(() => {
+    return screenWidth > 600;
+  }, [screenWidth]);
+
+  console.log(isMobileWidth);
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="focus:outline-none" asChild>
-        <button className="text-md h-12 w-full border-b-2 border-neutral-200 p-3 font-semibold transition flex-center hover:bg-zinc-700/10 dark:border-neutral-800 dark:hover:bg-zinc-700/50">
+        <button className="text-md flex h-12 w-full items-center justify-between border-b-2 border-neutral-200 p-3 font-semibold transition hover:bg-zinc-700/10 dark:border-neutral-800 dark:hover:bg-zinc-700/50">
           {server.name}
 
-          <ChevronDown className="ml-auto h-5 w-5" />
+          {isMobileWidth && <ChevronDown className={cn('h-5 w-5')} />}
         </button>
       </DropdownMenuTrigger>
 

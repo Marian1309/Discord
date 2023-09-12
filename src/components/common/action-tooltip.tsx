@@ -1,3 +1,5 @@
+'use client';
+
 import type { FC, ReactNode } from 'react';
 
 import {
@@ -21,7 +23,9 @@ const ActionTooltip: FC<Props> = ({ label, children, side, align }) => {
         <TooltipTrigger asChild>{children}</TooltipTrigger>
 
         <TooltipContent side={side} align={align}>
-          <p className="text-sm font-semibold capitalize">{label}</p>
+          <p className="text-sm font-semibold capitalize">
+            {label.toLowerCase()}
+          </p>
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>

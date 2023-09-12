@@ -1,0 +1,2 @@
+- Desktop Sidebar does not render at first time. +
+- While mobile first render unknown animation.

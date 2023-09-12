@@ -47,12 +47,10 @@ const RootLayout: FC<{ children: ReactNode }> = ({ children }) => {
           >
             <HotToastProvider />
 
-            <SocketProvider>
-              <ReactQueryProvider>
-                <ModalProvider />
+            <ModalProvider />
 
-                {children}
-              </ReactQueryProvider>
+            <SocketProvider>
+              <ReactQueryProvider>{children}</ReactQueryProvider>
             </SocketProvider>
           </ThemeProvider>
         </body>
