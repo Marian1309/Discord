@@ -17,7 +17,10 @@ const ioHandler = (req: NextApiRequest, res: NextApiResponseServerIo) => {
     const httpServer: NetServer = res.socket.server as any;
     const io = new SocketIO(httpServer, {
       path,
-      addTrailingSlash: false
+      addTrailingSlash: false,
+      cors: {
+        origin: process.env.NEXT_PUBLIC_LIVEKIT_URL
+      }
     });
 
     res.socket.server.io = io;

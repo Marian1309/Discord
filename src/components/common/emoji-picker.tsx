@@ -45,7 +45,6 @@ const EmojiPicker: FC<Props> = ({ onChange }) => {
           emojiSize={20}
           emojiButtonSize={30}
           perLine={isMobileWidth ? 7 : 10}
-          set="google"
         />
       </PopoverContent>
     </Popover>
